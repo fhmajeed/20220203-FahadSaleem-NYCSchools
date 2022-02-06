@@ -11,6 +11,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
+/**
+ * MainActivityViewModel is a kotlin base class on which I demonstrated implementation of Coroutine, Flows, ViewModel and MVVM pattern.
+ */
 class MainActivityViewModel(
     private val nycHighSchoolRepository: NycHighSchoolRepository
 ) : ViewModel() {

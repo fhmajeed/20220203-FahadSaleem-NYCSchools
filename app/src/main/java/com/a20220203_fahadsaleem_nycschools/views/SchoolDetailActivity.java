@@ -13,6 +13,9 @@ import com.a20220203_fahadsaleem_nycschools.model.School;
 import com.a20220203_fahadsaleem_nycschools.repository.NycHighSchoolRepositoryImp;
 import com.a20220203_fahadsaleem_nycschools.viewmodel.SchoolDetailActivityViewModel;
 
+/**
+ * School Detail Activity Maintain Selected School Detail and its score via model pattern.
+ */
 public class SchoolDetailActivity extends AppCompatActivity {
 
     private ActivitySchoolDetailBinding binding = null;
