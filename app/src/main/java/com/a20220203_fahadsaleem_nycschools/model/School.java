@@ -5,7 +5,15 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+
+/**
+ * School List Data Holder/Model
+ */
 public class School implements Parcelable {
+
+    @SerializedName("dbn")
+    private String dbn;
+
     @SerializedName("school_name")
     String schoolName;
 
@@ -17,6 +25,14 @@ public class School implements Parcelable {
 
     @SerializedName("phone_number")
     String phoneNumber;
+
+    public String getDbn() {
+        return dbn;
+    }
+
+    public void setDbn(String dbn) {
+        this.dbn = dbn;
+    }
 
     public String getSchoolName() {
         return schoolName;
@@ -55,6 +71,7 @@ public class School implements Parcelable {
         schoolEmail = in.readString();
         website = in.readString();
         phoneNumber = in.readString();
+        dbn = in.readString();
     }
 
     @Override
@@ -63,6 +80,7 @@ public class School implements Parcelable {
         dest.writeString(schoolEmail);
         dest.writeString(website);
         dest.writeString(phoneNumber);
+        dest.writeString(dbn);
     }
 
     @Override
