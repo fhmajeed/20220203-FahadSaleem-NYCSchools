@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private val mainActivityViewModel = MainActivityViewModel(NycHighSchoolRepositoryImp())
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: SchoolListAdapterV2
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             adapter = SchoolListAdapterV2(arrayListOf(), onClick = { school ->
                 val intent = Intent(this@MainActivity, SchoolDetailActivity::class.java)
                 val bundle = Bundle()
-                bundle.putParcelable("school", school)
+                bundle.putParcelable(PARCELABLE_KEY, school)
                 intent.putExtras(bundle)
                 startActivity(intent)
             })
@@ -71,5 +72,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
         mainActivityViewModel.getSchoolsList()
+    }
+
+    companion object {
+        const val PARCELABLE_KEY = "School"
     }
 }
