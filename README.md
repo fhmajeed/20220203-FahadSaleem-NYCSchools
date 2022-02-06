@@ -14,3 +14,10 @@ Create a native app to provide information on NYC High schools.
 1. Display all the SAT scores - include Math, Reading and Writing.
 1. SAT data here: https://data.cityofnewyork.us/Education/SATResults/f9bf-2cp4
 2. It is up to you to decide what additional information to display
+
+
+Android:
+1. Make sure you are correctly handing any necessary permissions.
+2. Please make sure you are using Java. If you want to demonstrate the use of
+3. Kotlin, we'd rather you use a combination of both.
+4. Use Java as the primary language. You can also show case your skills in Kotlin if you would like.
