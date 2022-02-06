@@ -7,6 +7,10 @@ import com.a20220203_fahadsaleem_nycschools.model.SchoolDetail;
 import com.a20220203_fahadsaleem_nycschools.repository.NycHighSchoolRepository;
 import com.a20220203_fahadsaleem_nycschools.repository.Result;
 
+/**
+ * SchoolDetailActivityViewModel is used to provoke MVVM principle because its java base class it has limitation,
+ * Demonstrated android/java threading and making IO thread call and post the result via live data.
+ */
 public class SchoolDetailActivityViewModel extends ViewModel {
 
     private final NycHighSchoolRepository nycHighSchoolRepository;
