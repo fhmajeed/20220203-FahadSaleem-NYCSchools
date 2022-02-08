@@ -3,14 +3,15 @@ package com.a20220203_fahadsaleem_nycschools.views;
 import static com.a20220203_fahadsaleem_nycschools.views.MainActivity.PARCELABLE_KEY;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.View;
 
 import com.a20220203_fahadsaleem_nycschools.R;
 import com.a20220203_fahadsaleem_nycschools.databinding.ActivitySchoolDetailBinding;
+import com.a20220203_fahadsaleem_nycschools.factory.ViewModelFactory;
 import com.a20220203_fahadsaleem_nycschools.model.School;
-import com.a20220203_fahadsaleem_nycschools.repository.NycHighSchoolRepositoryImp;
 import com.a20220203_fahadsaleem_nycschools.viewmodel.SchoolDetailActivityViewModel;
 
 /**
@@ -19,6 +20,7 @@ import com.a20220203_fahadsaleem_nycschools.viewmodel.SchoolDetailActivityViewMo
 public class SchoolDetailActivity extends AppCompatActivity {
 
     private ActivitySchoolDetailBinding binding = null;
+    private SchoolDetailActivityViewModel viewModel = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +30,9 @@ public class SchoolDetailActivity extends AppCompatActivity {
         binding.errorMessage.setVisibility(View.INVISIBLE);
         binding.errorMessage.setVisibility(View.INVISIBLE);
 
-        SchoolDetailActivityViewModel viewModel = new SchoolDetailActivityViewModel(new NycHighSchoolRepositoryImp());
         School school = getIntent().getParcelableExtra(PARCELABLE_KEY);
+
+        viewModel = new ViewModelProvider(this, new ViewModelFactory(school.getDbn())).get(SchoolDetailActivityViewModel.class);
 
         viewModel.schoolDetailMutableLiveData.observe(this, schoolDetail -> {
             String schoolName = getString(R.string.name) + " " + schoolDetail.getSchoolName();
@@ -49,7 +52,5 @@ public class SchoolDetailActivity extends AppCompatActivity {
         });
 
         viewModel.progressBar.observe(this, isShow -> binding.loadingPB.setVisibility((isShow) ? View.VISIBLE : View.INVISIBLE));
-
-        viewModel.getSchoolDetail(school.getDbn());
     }
 }
