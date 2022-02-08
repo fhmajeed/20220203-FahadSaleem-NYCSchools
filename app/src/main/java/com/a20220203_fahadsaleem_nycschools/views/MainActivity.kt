@@ -1,24 +1,20 @@
 package com.a20220203_fahadsaleem_nycschools.views
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.*
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.a20220203_fahadsaleem_nycschools.adapter.SchoolListAdapter
 import com.a20220203_fahadsaleem_nycschools.databinding.ActivityMainBinding
-import com.a20220203_fahadsaleem_nycschools.repository.NycHighSchoolRepositoryImp
 import com.a20220203_fahadsaleem_nycschools.viewmodel.MainActivityViewModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+
 
 class MainActivity : AppCompatActivity() {
 
-    private val mainActivityViewModel = MainActivityViewModel(NycHighSchoolRepositoryImp())
+    private lateinit var mainActivityViewModel: MainActivityViewModel
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: SchoolListAdapter
 
@@ -27,8 +23,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        mainActivityViewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
+
         //using kotlin extension function here to avoid boiler plate code
         with(binding) {
+            errorMessageTV.text = ""
             errorMessageTV.isVisible = false
             binding.loadingPB.isVisible = false
 
@@ -49,30 +48,21 @@ class MainActivity : AppCompatActivity() {
             nycSchoolRV.adapter = adapter
         }
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    mainActivityViewModel.listOfSchool.collect { list ->
-                        adapter.apply {
-                            addSchools(list)
-                            notifyDataSetChanged()
-                        }
-                    }
-                }
-                launch {
-                    mainActivityViewModel.errorMessage.collect { message ->
-                        binding.errorMessageTV.isVisible = true
-                        binding.errorMessageTV.text = message
-                    }
-                }
-                launch {
-                    mainActivityViewModel.showProgress.collect { isShow ->
-                        binding.loadingPB.isVisible = isShow
-                    }
-                }
+        mainActivityViewModel.errorMessage.observe(this, Observer { message ->
+            binding.errorMessageTV.isVisible = true
+            binding.errorMessageTV.text = message
+        })
+
+        mainActivityViewModel.showProgress.observe(this, Observer { isShow ->
+            binding.loadingPB.isVisible = isShow
+        })
+
+        mainActivityViewModel.listOfSchoolLiveData.observe(this, Observer { list ->
+            adapter.apply {
+                addSchools(list!!)
+                notifyDataSetChanged()
             }
-        }
-        mainActivityViewModel.getSchoolsList()
+        })
     }
 
     companion object {
