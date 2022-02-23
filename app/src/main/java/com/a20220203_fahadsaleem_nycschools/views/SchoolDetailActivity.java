@@ -1,7 +1,5 @@
 package com.a20220203_fahadsaleem_nycschools.views;
 
-import static com.a20220203_fahadsaleem_nycschools.views.MainActivity.PARCELABLE_KEY;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -30,7 +28,7 @@ public class SchoolDetailActivity extends AppCompatActivity {
         binding.errorMessage.setVisibility(View.INVISIBLE);
         binding.errorMessage.setVisibility(View.INVISIBLE);
 
-        School school = getIntent().getParcelableExtra(PARCELABLE_KEY);
+        School school = getIntent().getParcelableExtra(SchoolListFragment.PARCELABLE_KEY_SCHOOL);
 
         viewModel = new ViewModelProvider(this, new ViewModelFactory(school.getDbn())).get(SchoolDetailActivityViewModel.class);
 

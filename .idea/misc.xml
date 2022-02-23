@@ -5,6 +5,9 @@
       <map>
         <entry key="..\:/Users/fahad/AndroidStudioProjects/20220203FahadSaleemNYCSchools/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/20220203FahadSaleemNYCSchools/app/src/main/res/layout/activity_school_detail.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/fahad/AndroidStudioProjects/20220203FahadSaleemNYCSchools/app/src/main/res/layout/fragment_list.xml" value="0.3546875" />
+        <entry key="..\:/Users/fahad/AndroidStudioProjects/20220203FahadSaleemNYCSchools/app/src/main/res/layout/fragment_school_list.xml" value="0.3546875" />
+        <entry key="..\:/Users/fahad/AndroidStudioProjects/20220203FahadSaleemNYCSchools/app/src/main/res/layout/school_detail_fragment.xml" value="0.3546875" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/20220203FahadSaleemNYCSchools/app/src/main/res/layout/school_list.xml" value="0.36666666666666664" />
       </map>
     </option>
